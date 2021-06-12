@@ -1,141 +1,57 @@
 # Health Management System
-client_list = {1: "Harry", 2: "Rohan", 3: "Hammad"}
-lock_list = {1: "Exercise", 2: "Diet"}
-
-
 def getdate():
-    import datetime
-    return datetime.datetime.now()
+           import datetime
+           return datetime.datetime.now()
+ 
+print('HEALTH MANAGEMENT SYSTEM')
 
+directory = "/storage/emulated/0/Python app/"
 
-try:
-    print("Select Client Name:")
-    for key, value in client_list.items():
-        print("Press", key, "for", value, "\n", end="")
-    client_name = int(input())
+username = input("Enter your name: ")
 
-    print("Selected Client : ", client_list[client_name], "\n", end="")
+filepath = directory + username + '_food'
+filepath1 = directory + username + '_exercise'
 
-    print("Press 1 for Lock")
-    print("Press 2 for Retrieve")
-    op = int(input())
+with open(filepath, 'w+') as fp:
+	pass
+with open(filepath1, 'w+') as fp:
+	pass
 
-    if op == 1:
-        for key, value in lock_list.items():
-            print("Press", key, "to lock", value, "\n", end="")
-        lock_name = int(input())
-        print("Selected Job : ", lock_list[lock_name])
-        f = open(client_list[client_name] + "_" + lock_list[lock_name] + ".txt", "a")
-        k = 'y'
-        while (k != "n"):
-            print("Enter", lock_list[lock_name], "\n", end="")
-            mytext = input()
-            f.write("[ " + str(getdate()) + " ] : " + mytext + "\n")
-            k = input("ADD MORE ? y/n:")
-            continue
-        f.close()
-    elif op == 2:
-        for key, value in lock_list.items():
-            print("Press", key, "to retrieve", value, "\n", end="")
-        lock_name = int(input())
-        print(client_list[client_name], "-", lock_list[lock_name], "Report :", "\n", end="")
-        f = open(client_list[client_name] + "_" + lock_list[lock_name] + ".txt", "rt")
-        contents = f.readlines()
-        for line in contents:
-            print(line, end="")
-        f.close()
-    else:
-        print("Invalid Input !!!")
-except Exception as e:
-    print("Wrong Input !!!")
+print("Do you want to log your data or retrieve your data ?")
 
+user_choice = int(input("Press 1 to log your data and 2 to retrieve your data: "))
 
+def log(username):
+	print('What you want to log: Exercise or food')
+	user_choice1 = int(input('Press 1 for food and 2 for exercise: '))
+	if user_choice == 1:
+		value = input('Enter exercise name: ')
+		with open(filepath, 'a') as op:
+			op.write(str([str(getdate())]) + ': ' + value + '\n')
+		print('Successfully written')
+	elif user_choice == 2:
+		value = input('Enter food item: ')
+		with open(filepath, 'a') as op:
+			op.write(str([str(getdate())]) +  ':' + value + '\n')
+		print('Successfully written')
 
+def retrieve(username):
+	print('Which file do you want to retrieve ?')
+	user_choice2 = int(input('Enter 1 for food list and enter 2 for exercise list: '))
+	if user choice == 1:
+		with open(filepath) as op:
+			for i in op:
+				print(i, end = '')
+	elif user_choice == 2:
+		with open(filepath1) as op:
+			for i in op:
+				print(i, end = '')
+	else:
+		print('Invalid input !!')
 
-
-
-# Second one
-import datetime
-def gettime():
-    return datetime.datetime.now()
-def take(k):
-    if k==1:
-        c=int(input("enter 1 for excersise and 2 for food"))
-        if(c==1):
-            value=input("type here\n")
-            with open("harry-ex.txt","a") as op:
-                op.write(str([str(gettime())])+": "+value+"\n")
-            print("successfully written")
-        elif(c==2):
-            value = input("type here\n")
-            with open("harry-food.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n")
-            print("successfully written")
-    elif(k==2):
-        c = int(input("enter 1 for excersise and 2 for food"))
-        if (c == 1):
-            value = input("type here\n")
-            with open("rohan-ex.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n")
-            print("successfully written")
-        elif (c == 2):
-            value = input("type here\n")
-            with open("rohan-food.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n")
-            print("successfully written")
-    elif(k==3):
-        c = int(input("enter 1 for excersise and 2 for food"))
-        if (c == 1):
-            value = input("type here\n")
-            with open("hammad-ex.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n")
-            print("successfully written")
-        elif (c == 2):
-            value = input("type here\n")
-            with open("hammad-food.txt", "a") as op:
-                op.write(str([str(gettime())]) + ": " + value + "\n")
-            print("successfully written")
-    else:
-        print("plz enter valid input (1(harry),2(rohan),3(hammad)")
-def retrieve(k):
-    if k==1:
-        c=int(input("enter 1 for excersise and 2 for food"))
-        if(c==1):
-            with open("harry-ex.txt") as op:
-                for i in op:
-                    print(i,end="")
-        elif(c==2):
-            with open("harry-food.txt") as op:
-                for i in op:
-                    print(i, end="")
-    elif(k==2):
-        c = int(input("enter 1 for excersise and 2 for food"))
-        if (c == 1):
-            with open("rohan-ex.txt") as op:
-                for i in op:
-                    print(i, end="")
-        elif (c == 2):
-            with open("rohan-food.txt") as op:
-                for i in op:
-                    print(i, end="")
-    elif(k==3):
-        c = int(input("enter 1 for excersise and 2 for food"))
-        if (c == 1):
-            with open("hammad-ex.txt") as op:
-                for i in op:
-                    print(i, end="")
-        elif (c == 2):
-            with open("hammad-food.txt") as op:
-                for i in op:
-                    print(i, end="")
-    else:
-        print("plz enter valid input (harry,rohan,hammad)")
-print("health management system: ")
-a=int(input("press 1 for lock the value and 2 for retrieve "))
-
-if a==1:
-    b = int(input("press 1 for harry 2 for rohan 3 for hammad "))
-    take(b)
+if user_choice == 1:
+	log(username)
+elif user_choice == 2:
+	retrieve(username)
 else:
-    b = int(input("press 1 for harry 2 for rohan 3 for hammad "))
-    retrieve(b)
+	print('Invalid input !!')
